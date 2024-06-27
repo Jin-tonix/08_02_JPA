@@ -3,6 +3,7 @@
 
     <persistence-unit name="jpatest">
         <class>com.ohgiraffers.section02.crud.Menu</class>
+        <class>com.ohgiraffers.section03.persistencecontext.Menu</class>
         <properties>
             <!-- Db와의 Connection을 위한 정보를 제공함 -->
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
