@@ -3,15 +3,21 @@
 
     <persistence-unit name="jpatest">
         <class>com.ohgiraffers.mapping.section01.entity.Member</class>
+        <class>com.ohgiraffers.mapping.section02.column.Member</class>
+        <class>com.ohgiraffers.mapping.section03.primarykey.idnetity.Member</class>
+        <class>com.ohgiraffers.mapping.section03.primarykey.table.Member</class>
+        <class>com.ohgiraffers.mapping.section04.enumtype.Member</class>
+        <class>com.ohgiraffers.mapping.section05.access.Member</class>
         <properties>
+            <!-- Db와의 Connection을 위한 정보를 제공함 -->
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gangnam"/>
             <property name="jakarta.persistence.jdbc.user" value="gangnam"/>
             <property name="jakarta.persistence.jdbc.password" value="gangnam"/>
-
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gangnam"/>
+            <!-- jpa 설정을 위한 정보 -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
         </properties>
     </persistence-unit>
 </persistence>
