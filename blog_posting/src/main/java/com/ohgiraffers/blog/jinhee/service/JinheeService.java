@@ -1,8 +1,8 @@
-package com.ohgiraffers.blog.jaesuk.service;
+package com.ohgiraffers.blog.jinhee.service;
 
-import com.ohgiraffers.blog.jaesuk.model.dto.BlogDTO;
-import com.ohgiraffers.blog.jaesuk.model.entity.JaesukBlog;
-import com.ohgiraffers.blog.jaesuk.repository.JeasuckRepository;
+import com.ohgiraffers.blog.jinhee.model.dto.BlogDTO;
+import com.ohgiraffers.blog.jinhee.model.entity.JinheeBlog;
+import com.ohgiraffers.blog.jinhee.repository.JinheeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,30 +11,30 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class JeasukService {
+public class JinheeService {
 
-    private final JeasuckRepository jeasuckRepository;
+    private final JinheeRepository jinheeRepository;
 
     @Autowired
-    public JeasukService(JeasuckRepository jeasuckRepository) {
-        this.jeasuckRepository = jeasuckRepository;
+    public JinheeService(JinheeRepository jinheeRepository) {
+        this.jinheeRepository = jinheeRepository;
     }
 
     @Transactional
     public int post(BlogDTO blogDTO) {
-        List<JaesukBlog> jaesukBlogs = jeasuckRepository.findAll();
+        List<JinheeBlog> jinheeBlogs = jinheeRepository.findAll();
         // 도메인 로직
-        for (JaesukBlog blog: jaesukBlogs) {
+        for (JinheeBlog blog: jinheeBlogs) {
             if(blog.getBlogTitle().equals(blogDTO.getBlogTitle())){
                 return 0;
             }
         }
 
-        JaesukBlog saveBlog = new JaesukBlog();
+        JinheeBlog saveBlog = new JinheeBlog();
         saveBlog.setBlogContent(blogDTO.getBlogContent());
         saveBlog.setBlogTitle(blogDTO.getBlogTitle());
         saveBlog.setCreateDate(new Date());
-        JaesukBlog result  = jeasuckRepository.save(saveBlog);
+        JinheeBlog result  = jinheeRepository.save(saveBlog);
 
         int resultValue = 0;
 

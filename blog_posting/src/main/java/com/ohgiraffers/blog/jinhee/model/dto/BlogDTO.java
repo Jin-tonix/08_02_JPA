@@ -1,4 +1,4 @@
-package com.ohgiraffers.blog.jaesuk.model.dto;
+package com.ohgiraffers.blog.jinhee.model.dto;
 
 public class BlogDTO {
 

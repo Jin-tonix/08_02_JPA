@@ -1,12 +1,12 @@
-package com.ohgiraffers.blog.jaesuk.model.entity;
+package com.ohgiraffers.blog.jinhee.model.entity;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "jaesuk_blog")
-public class JaesukBlog {
+@Table(name = "jinhee_blog")
+public class JinheeBlog {
 
     @Id
     @Column(name = "blog_no")
@@ -24,10 +24,10 @@ public class JaesukBlog {
     private Date createDate;
 
 
-    public JaesukBlog() {
+    public JinheeBlog() {
     }
 
-    public JaesukBlog(int blogNo, String blogTitle, String blogContent, Date createDate) {
+    public JinheeBlog(int blogNo, String blogTitle, String blogContent, Date createDate) {
         this.blogNo = blogNo;
         this.blogTitle = blogTitle;
         this.blogContent = blogContent;
@@ -68,7 +68,7 @@ public class JaesukBlog {
 
     @Override
     public String toString() {
-        return "JaesukBlog{" +
+        return "JinheeBlog{" +
                 "blogNo=" + blogNo +
                 ", blogTitle='" + blogTitle + '\'' +
                 ", blogContent='" + blogContent + '\'' +
