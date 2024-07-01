@@ -32,18 +32,25 @@ public class FieldAccessTests {
 
     @Test
     public void 필드_접근_테스트(){
-        ////Member member = new Member(0,"String memberId", "String memberPwd", "String nickName");
-        //
-        //EntityTransaction transaction = entityManager.getTransaction();
-        //transaction.begin();
-        //entityManager.persist(member);
-        //transaction.commit();
+        Member member = new Member(0,"String memberId", "String memberPwd", "String nickName");
 
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(member);
+        transaction.commit();
+
+        Member foundMember = entityManager.find(Member.class, 1);
+
+        Assertions.assertEquals(member,foundMember);
     }
 
     @Test
-    public void 조회테스트(){
-        Member member = entityManager.find(Member.class, 1);
-        System.out.println(member);
+    public void fieldAccess_test(){
+        Member fieldMember = entityManager.find(Member.class,1);
+        //fieldMember.memberNo = 1 /* db에서 조회된 값 */;
+
+        Assertions.assertNotNull(fieldMember);
+        System.out.println(fieldMember);
     }
+
 }
