@@ -4,45 +4,62 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
+    /* Primary key에는 @Id 어노테이션과 @GeneratedValue 어노테이션을 사용한다.
+       @Id 어노테이션은 엔티티 클래스에서 primary key 역할을 하는 필드를 지정할 때 사용된다.
+       @GeneratedValue 어노테이션을 함께 사용하면 primary key 값을 자동으로 생성할 수 있다.
 
-@Entity(name = "member_section03_table")
-@Table(name = "tbl_member_section03_table")
+      데이터베이스마다 기본 키를 생성하는 방식이 서로 다르다.
+      @GeneratedValue 어노테이션은 다음과 같은 속성을 가지고 있다.
+
+   - strategy : 자동 생성 전략을 지정
+       - GenerationType.IDENTITY : 기본 키 생성을 데이터베이스에 위임(MySQL의 AUTO_INCREMENT)
+       - GenerationType.SEQUENCE : 데이터베이스 시퀀스 객체 사용(ORACLE의 SEQUENCE)
+       - GenerationType.TABLE : 키 생성 테이블 사용
+       - GenerationType.AUTO : 자동 선택 (MySQL이라면 IDENTITY, ORACLE이라면 SEQUENCE로 선택)
+   - generator : strategy 값을 GenerationType.TABLE로 지정한 경우 사용되는 테이블 이름을 지정
+   - initialValue : strategy 값을 GenerationType.SEQUENCE로 지정한 경우 시퀀스 초기값을 지정
+   - allocationSize : strategy 값을 GenerationType.SEQUENCE로 지정한 경우 시퀀스 증가치를 지정
+    * */
+
+@Entity(name = "member_section03_table") // 이름은 생략가능
+@Table(name = "tbl_member_section03_table") // DB 테이블과 매칭시킬 이름
 @TableGenerator(
-        name = "member_seq_table_generator",
+        name="member_seq_table_generator",
         table = "tbl_my_sequences",
         pkColumnValue = "my_seq_member_no"
 )
 public class Member {
 
-    @Id
-    @Column(name = "member_no")
+//    데이터베이스 생성
+
+    @Id // 프라이머리키 선언 없으면 에러남. 필수값
+    @Column(name = "member_no") // 데이터베이스 테이블 컬럼 이름
+    // mysql, postsql에서 사용 애노테이션은 주로 데이터베이스의 자동 증가(auto-increment) 기능을 이용하여 고유한 기본 키 값을 생성합니다.
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "member_seq_table_generator")
     private int memberNo;
 
     @Column(name = "member_id")
     private String memberId;
 
-
     @Column(name = "member_pwd")
     private String memberPwd;
 
-    @Column(name = "nick_name")
-    @Transient
+    @Column(name = "nickName")
+    @Transient // select에서 안보임
     private String nickName;
 
-    @Column(name="phone", columnDefinition="varchar(200) default '010-0000-0000'")
+    // 컬럼 길이를 varchar 200으로 정의하고 없을땐 기본 값을 정해줌
+    @Column(name = "phone", columnDefinition = "varchar(200) default '010-0000-0000'")
     private String phone;
 
-    @Column(name = "address", unique = true)
+    @Column(name = "address", unique = true) // 유니크 제약조건을 검
     private String address;
 
     @Column(name = "erroll_data")
-    @Temporal(TemporalType.TIMESTAMP)
-    //@Temporal(TemporalType.DATE)
-    //@Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP) // 시간
     private Date enrollDate;
 
-    @Column(name = "member_role", nullable = false)
+    @Column(name = "member_role", nullable = false) // null을 허용할 것인가.
     private String memberRole;
 
     @Column(name = "status")

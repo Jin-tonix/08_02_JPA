@@ -1,14 +1,15 @@
-package com.ohgiraffers.mapping.section01.entity;
+package com.ohgiraffers.mapping.section03.primarykey.identity;
 
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.*;
 
 import java.util.Date;
 
-public class EntityMappingTests {
+public class PrimaryKeyMappingTests {
 
     private static EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -38,11 +39,11 @@ public class EntityMappingTests {
     }
     
     @Test
-    public void 테이블_만들기_테스트(){
+    public void 컬럼에서_사용하는_속성_테스트(){
         // given
         Member member = new Member();
         member.setMemberNo(1);
-        member.setMemberId("홍길동");
+        member.setMemberId("테스트 길동");
         member.setMemberPwd("pass01");
         member.setNickName("user01");
         member.setAddress("강남구");
@@ -52,10 +53,13 @@ public class EntityMappingTests {
         member.setStatus("y");
 
         // when
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(member);
+        transaction.commit();
 
         // then
-        Member foundMember = entityManager.find(Member.class, 1);
+        Member foundMember = entityManager.find(Member.class, member.getMemberNo());
         Assertions.assertEquals(member.getMemberNo(), foundMember.getMemberNo());
         
     }

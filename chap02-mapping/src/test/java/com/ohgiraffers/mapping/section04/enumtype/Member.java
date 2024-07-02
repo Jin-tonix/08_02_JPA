@@ -4,42 +4,41 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 
-
-@Entity(name = "member_section04")
-@Table(name = "tbl_member_section04")
+@Entity(name = "member_section04") // 이름은 생략가능
+@Table(name = "tbl_member_section04") // DB 테이블과 매칭시킬 이름
 public class Member {
 
-    @Id
-    @Column(name = "member_no")
+//    데이터베이스 생성
+
+    @Id // 프라이머리키 선언 없으면 에러남. 필수값
+    @Column(name = "member_no") // 데이터베이스 테이블 컬럼 이름
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memberNo;
 
     @Column(name = "member_id")
     private String memberId;
 
-
     @Column(name = "member_pwd")
     private String memberPwd;
 
-    @Column(name = "nick_name")
-    @Transient
+    @Column(name = "nickName")
+    @Transient // select에서 안보임
     private String nickName;
 
-    @Column(name="phone", columnDefinition="varchar(200) default '010-0000-0000'")
+    // 컬럼 길이를 varchar 200으로 정의하고 없을땐 기본 값을 정해줌
+    @Column(name = "phone", columnDefinition = "varchar(200) default '010-0000-0000'")
     private String phone;
 
-    @Column(name = "address", unique = true)
+    @Column(name = "address", unique = true) // 유니크 제약조건을 검
     private String address;
 
     @Column(name = "erroll_data")
-    @Temporal(TemporalType.TIMESTAMP)
-    //@Temporal(TemporalType.DATE)
-    //@Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP) // 시간
     private Date enrollDate;
 
-    @Column(name = "member_role", nullable = false)
-    //@Enumerated(EnumType.ORDINAL)
-    @Enumerated(EnumType.STRING)
+    @Column(name = "member_role", nullable = false) // null을 허용할 것인가.
+//    @Enumerated(EnumType.ORDINAL) 숫자형
+    @Enumerated(EnumType.STRING) // Roletype에 저장되어있는 값으로 저장한다.
     private Roletype memberRole;
 
     @Column(name = "status")
@@ -146,4 +145,5 @@ public class Member {
                 ", status='" + status + '\'' +
                 '}';
     }
+
 }

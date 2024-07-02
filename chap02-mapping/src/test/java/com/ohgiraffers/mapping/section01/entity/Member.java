@@ -4,35 +4,35 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-
 /*
 * @Entity 어노테이션은 jpa에서 사용되는 엔티티 클래스임을 표시한다.
-* 이 어노테이션을 사용하면 해당 클래스가 데이터베이스의 테이블과 매핑된다.
-* @entity 어노테이션은 클래스 선언 위에 위치해야한다.
-* 또한 , name 속성을 사용하여 엔티티의 이름을 지정해줄 수 있으며
+* 이 어노테이션을 사용하면 해당 클래스가 데이텁이스의 테이블과 매핑된다.
+* @Entity 어노테이션은 클래스 선언 위에 위치해야한다.
+* 또한, name 속성을 사용하여 엔티티 이름을 지정해 줄 수 있으며
 * 생략하면 자동으로 클래스 이름을 엔티티명으로 사용한다.
 *
-* - 프로젝트 내에 다른 패키지에도 동일한 엔티티가 존재하는 경우 해당 엔티티를 식별하기 위한 중복되지 않는
+* - 프로젝트 내에 다른 패키지에도 동일한 텐티티가 존재하는 경우 해당 엔티티를 식별하기 위한 중복되지 않는
 *   name을 지정해주어야 한다.
 * - 기본 생성자는 필수로 작성해야 한다.
-* - final 클래스,enum, interface, inner class에서는 사용할 수 없다.
+* - final 클래스, enum, interface, inner class에서는 사용할 수 없다.
 * - 저장할 필드에 final을 사용하면 안된다.
 * */
-@Entity(name = "member_section01")
-@Table(name = "tbl_member_section01")
+
+@Entity(name = "member_section01") // 이름은 생략가능
+@Table(name = "tbl_member_section01") // DB 테이블과 매칭시킬 이름
 public class Member {
 
-    @Id
-    @Column(name = "member_no")
+//    데이터베이스 생성
+
+    @Id // 프라이머리키 선언 없으면 에러남. 필수값
+    @Column(name = "member_no") // 데이터베이스 테이블 컬럼 이름
     private int memberNo;
 
     @Column(name = "member_id")
     private String memberId;
-
 
     @Column(name = "member_pwd")
     private String memberPwd;

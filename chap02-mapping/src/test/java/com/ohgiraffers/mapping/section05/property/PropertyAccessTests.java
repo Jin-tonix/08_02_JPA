@@ -38,10 +38,8 @@ public class PropertyAccessTests {
         //when
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        entityManager.persist(member);	// 1번
-        entityTransaction.commit();		// 2번 (why?)
-
-        System.out.println(member);
+        entityManager.persist(member);   // 1번
+        entityTransaction.commit();      // 2번 (why?)
 
     }
 
